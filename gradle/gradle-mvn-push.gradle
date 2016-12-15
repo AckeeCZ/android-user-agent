@@ -1,0 +1,32 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+
+def getDestUrl() {
+    if (isReleaseBuild()) {
+        return "s3://android-maven/releases"
+    } else {
+        return "s3://android-maven/snapshots"
+    }
+}
+
+
+publishing {
+    publications {
+        aar(MavenPublication) { // Publish aar knihovnu
+            groupId GROUP
+            version = VERSION_NAME
+            artifactId POM_ARTIFACT_ID
+
+            // Tell maven to prepare the generated "*.aar" file for publishing
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+    repositories {
+        add isReleaseBuild() ? project.repositories.s3releases : project.repositories.s3snapshots
+    }
+}
