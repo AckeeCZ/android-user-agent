@@ -8,7 +8,7 @@ import android.os.Build;
 import java.util.Locale;
 
 /**
- * Singleton class that generates user agent userAgentString with app specific data for easier server device distinction
+ * Singleton class that generates user agent string with app specific data for easier server device distinction
  *
  * @author David Bilik [david.bilik@ackee.cz]
  * @since 15/12/16
@@ -33,7 +33,7 @@ public class UserAgent {
     }
 
     /**
-     * Private constructor that generates and caches User-Agent userAgentString
+     * Private constructor that generates and caches User-Agent string
      *
      * @param ctx application Context
      */
@@ -42,11 +42,11 @@ public class UserAgent {
     }
 
     /**
-     * Returns UserAgent userAgentString in format
+     * Returns UserAgent string in format
      * "application_name/application_version (package_name; build:version_code; Android android_version; Model:device_model) {@param networkClientUserAgent}"
      *
      * @param networkClientUserAgent user agent of used http client. For okhttp/3.20 (Version.userAgent())
-     * @return user agent userAgentString
+     * @return user agent string
      */
     public String getUserAgentString(String networkClientUserAgent) {
         return String.format("%s %s", userAgentString, networkClientUserAgent);
@@ -62,9 +62,9 @@ public class UserAgent {
     }
 
     /**
-     * Get version of android as userAgentString eg. 4.1.2, 7.0.1 etc.
+     * Get version of android as string eg. 4.1.2, 7.0.1 etc.
      *
-     * @return String androidversion
+     * @return String as android version
      */
     private String getAndroidVersion() {
         return Build.VERSION.RELEASE;
