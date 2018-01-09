@@ -1,6 +1,4 @@
-<manifest package="cz.useragent"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="cz.useragent">
 
     <application/>
-
 </manifest>
