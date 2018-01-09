@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -15,17 +16,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
         maven {
             name "s3releases"
             url "s3://android-maven/releases"
-            credentials(AwsCredentials) {
-                accessKey AWS_ACCESS_KEY
-                secretKey AWS_SECRET_KEY
-            }
-        }
-        maven {
-            name "s3snapshots"
-            url "s3://android-maven/snapshots"
             credentials(AwsCredentials) {
                 accessKey AWS_ACCESS_KEY
                 secretKey AWS_SECRET_KEY
