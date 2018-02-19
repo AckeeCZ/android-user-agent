@@ -5,7 +5,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import java.text.Normalizer;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Singleton class that generates user agent string with app specific data for easier server device distinction
@@ -58,7 +60,7 @@ public class UserAgent {
      * @return String device model
      */
     private String getModel() {
-        return Build.MODEL;
+        return deaccent(Build.MODEL);
     }
 
     /**
@@ -122,6 +124,18 @@ public class UserAgent {
     private String getApplicationName(Context context) {
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         int stringId = applicationInfo.labelRes;
-        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
+        return deaccent(stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId));
+    }
+
+    /**
+     * Removes all the diacritics from the source string
+     *
+     * @param source the string you want to remove the diacritics from
+     * @return the source string without any diacritics
+     */
+    private static String deaccent(String source) {
+        String nfdNormalizedString = Normalizer.normalize(source, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 }

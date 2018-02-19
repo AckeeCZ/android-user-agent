@@ -14,7 +14,7 @@ Tapito/2.5.8 (com.tapmedia.tapito.debug; build:1520; Android 7.0; Model:Nexus 5X
 
 ## Dependencies
 ```groovy
-compile "cz.ackee:user-agent:1.0.1"
+compile "cz.ackee:user-agent:1.0.3"
 ```
 
 ### Usage
