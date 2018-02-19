@@ -51,7 +51,7 @@ public class UserAgent {
      * @return user agent string
      */
     public String getUserAgentString(String networkClientUserAgent) {
-        return String.format("%s %s", userAgentString, networkClientUserAgent);
+        return deaccent(String.format("%s %s", userAgentString, networkClientUserAgent));
     }
 
     /**
@@ -60,7 +60,7 @@ public class UserAgent {
      * @return String device model
      */
     private String getModel() {
-        return deaccent(Build.MODEL);
+        return Build.MODEL;
     }
 
     /**
@@ -124,7 +124,7 @@ public class UserAgent {
     private String getApplicationName(Context context) {
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         int stringId = applicationInfo.labelRes;
-        return deaccent(stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId));
+        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 
     /**
