@@ -18,16 +18,15 @@ Tapito/2.5.8 (com.tapmedia.tapito.debug; build:1520; Android 7.0; Model:Nexus 5X
 ```groovy
 compile "cz.ackee:user-agent:x.x.x"
 ```
-You can find latest version name in lib.gradle file
 
 ### Usage
 Usage is very simple, basically this whole library is just one singleton class. Because of abstraction from http library you use there is need for passing user agent string of this library. We are practically everywhere using OkHttp but who knows. 
 
 Example in OkHttp interceptor 
 ```java
-Request request = chain.request()
+val request = chain.request()
                       .newBuilder()
-                      .header("User-Agent", UserAgent.getInstance(App.getInstance()).getUserAgentString(Version.userAgent()))
+                      .header("User-Agent", UserAgent.getInstance(context).getUserAgentString(Version.userAgent()))
                       .build();
 ```
 
