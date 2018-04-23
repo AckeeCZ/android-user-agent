@@ -11,10 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Singleton class that generates user agent string with app specific data for easier server device distinction
- *
- * @author David Bilik [david.bilik@ackee.cz]
- * @since 15/12/16
- **/
+ */
 public class UserAgent {
     public static final String TAG = UserAgent.class.getName();
 
@@ -45,7 +42,7 @@ public class UserAgent {
 
     /**
      * Returns UserAgent string in format
-     * "application_name/application_version (package_name; build:version_code; Android android_version; Model:device_model) {@param networkClientUserAgent}"
+     * "application_name/application_version (package_name; build:version_code; Android android_version; Model:device_model) networkClientUserAgent"
      *
      * @param networkClientUserAgent user agent of used http client. For okhttp/3.20 (Version.userAgent())
      * @return user agent string
