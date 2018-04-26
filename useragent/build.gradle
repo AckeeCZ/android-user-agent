@@ -32,7 +32,7 @@ dependencies {
 
 ext {
     bintrayName = 'useragent'
-    publishedArtifactId = 'user-agent'
+    publishedArtifactId = 'useragent'
 
     libraryName = 'User Agent'
     libraryDescription = 'Library that generates User-Agent string for http requests'
