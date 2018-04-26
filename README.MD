@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/ackeecz/user-agent/user-agent/images/download.svg) ](https://bintray.com/ackeecz/user-agent/user-agent/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/ackeecz/user-agent/useragent/images/download.svg) ](https://bintray.com/ackeecz/user-agent/user-agent/_latestVersion)
 
 # Android User Agent Android Library
 Library that generates User-Agent string for http requests. 
