@@ -1,4 +1,4 @@
-package cz.ackee.useragent;
+package io.github.ackeecz.useragent;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
  * Singleton class that generates user agent string with app specific data for easier server device distinction
  */
 public class UserAgent {
-    public static final String TAG = UserAgent.class.getName();
 
     private static UserAgent instance;
     private final String userAgentString;

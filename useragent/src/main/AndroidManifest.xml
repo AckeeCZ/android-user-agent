@@ -1,4 +1,4 @@
-<manifest package="cz.useragent">
+<manifest package="io.github.ackeecz.useragent">
 
-    <application/>
+    <application />
 </manifest>

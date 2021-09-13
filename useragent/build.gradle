@@ -1,16 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdk 30
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode = libProperties['VERSION_CODE']
+        minSdk 16
+        targetSdk 30
         versionName libProperties['VERSION_NAME']
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
     }
     buildTypes {
@@ -21,22 +19,10 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    testImplementation 'junit:junit:4.12'
-}
 
 ext {
-    bintrayName = 'useragent'
-    publishedArtifactId = 'useragent'
-
-    libraryName = 'User Agent'
-    libraryDescription = 'Library that generates User-Agent string for http requests'
+    PUBLISH_ARTIFACT_ID = 'user-agent'
+    POM_DESCRIPTION = 'Library for generating User agent string that suits Ackee purposes'
 }
 
-apply from: rootProject.file('gradle/bintray/install.gradle')
-apply from: rootProject.file('gradle/bintray/bintray.gradle')
+apply from: "${rootProject.projectDir}/gradle/mavencentral/publish.gradle"

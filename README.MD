@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/ackeecz/user-agent/useragent/images/download.svg) ](https://bintray.com/ackeecz/user-agent/user-agent/_latestVersion)
+[ ![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.ackeecz/user-agent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.ackeecz/user-agent)
 
 # Android User Agent Android Library
 Library that generates User-Agent string for http requests. 
@@ -16,7 +16,7 @@ Tapito/2.5.8 (com.tapmedia.tapito.debug; build:1520; Android 7.0; Model:Nexus 5X
 
 ## Dependencies
 ```groovy
-compile "cz.ackee.useragent:useragent:x.x.x"
+implementation "io.github.ackeecz:useragent:x.x.x"
 ```
 
 ### Usage
@@ -25,15 +25,15 @@ Usage is very simple, basically this whole library is just one singleton class. 
 Example in OkHttp interceptor 
 ```java
 val request = chain.request()
-                      .newBuilder()
-                      .header("User-Agent", UserAgent.getInstance(context).getUserAgentString(Version.userAgent()))
-                      .build();
+                  .newBuilder()
+                  .header("User-Agent", UserAgent.getInstance(context).getUserAgentString(Version.userAgent()))
+                  .build();
 ```
 
 `Version.userAgent()` is getter for OkHttp string like `okhttp/3.2.0`
 
 ## License
-Copyright 2018 Ackee, s.r.o.
+Copyright 2021 Ackee, s.r.o.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
