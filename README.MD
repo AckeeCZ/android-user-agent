@@ -1,11 +1,11 @@
 [ ![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.ackeecz/user-agent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.ackeecz/user-agent)
 
-# Android User Agent Android Library
-Library that generates User-Agent string for http requests. 
+# Android User Agent Library
+Library that generates User-Agent string for HTTP requests. 
 
 ## Purpose of this library
 In Ackee, we need more info in User-Agent header than standard `System.getProperty("http.agent")` provides and purpose of this library is to provide better one. 
-The format of our User-Agent is 
+The default format of our User-Agent is:
 ```
 application_name/application_version (package_name; build:version_code; Android android_version; Model:device_model) network_client_user_agent
 ```
@@ -20,20 +20,29 @@ implementation "io.github.ackeecz:user-agent:x.x.x"
 ```
 
 ### Usage
-Usage is very simple, basically this whole library is just one singleton class. Because of abstraction from http library you use there is need for passing user agent string of this library. We are practically everywhere using OkHttp but who knows. 
+Usage is very simple, just create an instance of `UserAgent` class with an optional `Normalizer` 
+instance for a custom normalization. Library already provides a few `Normalizer` implementations
+for a quick setup. 
 
-Example in OkHttp interceptor 
-```java
+Because of an abstraction from the HTTP library you use, there is a need for passing the user agent 
+string of this library. We use practically everywhere OkHttp but who knows. 
+
+Example in OkHttp interceptor:
+
+```kotlin
+// Create the instance somewhere. Probably outside of the interceptor proceed call.
+val userAgent = UserAgent(context)
+
 val request = chain.request()
                   .newBuilder()
-                  .header("User-Agent", UserAgent.getInstance(context).getUserAgentString(Version.userAgent()))
-                  .build();
+                  .header("User-Agent", userAgent.getUserAgentString(Version.userAgent()))
+                  .build()
 ```
 
 `Version.userAgent()` is getter for OkHttp string like `okhttp/3.2.0`
 
 ## License
-Copyright 2021 Ackee, s.r.o.
+Copyright 2023 Ackee, s.r.o.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
