@@ -14,13 +14,14 @@ internal class UserAgentDelegateTest : FunSpec({
     fun underTest(normalizer: Normalizer?) = UserAgentDelegate(clientInfo, normalizer)
 
     fun ClientInfo.getExpectedUserAgent(
-        networkClientUserAgent: String,
+        networkClientUserAgent: String?,
         deviceModel: String = this.deviceModel,
     ): String {
         val buildPart = "build:$appVersionCode"
         val androidPart = "Android $androidVersion"
         val modelPart = "Model:$deviceModel"
-        return "$appName/$appVersionName ($packageName; $buildPart; $androidPart; $modelPart) $networkClientUserAgent"
+        val networkClientUAPart = if (networkClientUserAgent == null) "" else " $networkClientUserAgent"
+        return "$appName/$appVersionName ($packageName; $buildPart; $androidPart; $modelPart)$networkClientUAPart"
     }
 
     test("get user agent value without normalization") {
@@ -38,5 +39,11 @@ internal class UserAgentDelegateTest : FunSpec({
         val userAgentValue = underTest(DiacriticsNormalizer()).getNormalizedUserAgent("")
 
         userAgentValue shouldBe clientInfo.getExpectedUserAgent(networkClientUserAgent = "", deviceModel = "AEGH")
+    }
+
+    test("passing null network client user agent does not add anything to the resulting user agent string") {
+        val userAgentValue = underTest(normalizer = null).getNormalizedUserAgent(networkClientUserAgent = null)
+
+        userAgentValue shouldBe clientInfo.getExpectedUserAgent(networkClientUserAgent = null)
     }
 })

@@ -21,8 +21,9 @@ internal class UserAgentDelegate(clientInfo: ClientInfo, private val normalizer:
         clientInfo.deviceModel,
     )
 
-    fun getNormalizedUserAgent(networkClientUserAgent: String): String {
-        val notNormalizedUserAgent = String.format("%s %s", userAgentString, networkClientUserAgent)
+    fun getNormalizedUserAgent(networkClientUserAgent: String?): String {
+        val resolvedNetworkClientUserAgent = if (networkClientUserAgent == null) "" else " $networkClientUserAgent"
+        val notNormalizedUserAgent = String.format("%s%s", userAgentString, resolvedNetworkClientUserAgent)
         return normalizer?.normalize(notNormalizedUserAgent) ?: notNormalizedUserAgent
     }
 }
